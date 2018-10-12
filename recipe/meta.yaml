@@ -1,5 +1,4 @@
-{% set version = '3.32-1' %}
-
+{% set version = '3.34' %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -10,34 +9,39 @@ package:
 source:
   fn: survey_{{ version }}.tar.gz
   url:
-    - https://cran.r-project.org/src/contrib/survey_{{ version }}.tar.gz
-    - https://cran.r-project.org/src/contrib/Archive/survey/survey_{{ version }}.tar.gz
-  sha256: de06b08327b80ceab9d255ab9a41247d316cfc2eb2039c299b2bdf29782b5c51
+    - {{ cran_mirror }}/src/contrib/survey_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/survey/survey_{{ version }}.tar.gz
+  sha256: c5f8ea6595cf33dbfcf650fca1561338f7d14ee238459dd354aad43571250224
 
 build:
+  merge_build_host: True  # [win]
   number: 0
   skip: true  # [win32]
-
   rpaths:
     - lib/R/lib/
     - lib/
 
 requirements:
   build:
+    - {{posix}}zip               # [win]
+  host:
     - r-base
     - r-matrix
     - r-lattice
+    - r-minqa
+    - r-numderiv
     - r-survival
-
   run:
     - r-base
     - r-matrix
     - r-lattice
+    - r-minqa
+    - r-numderiv
     - r-survival
 
 test:
   commands:
-    - $R -e "library('survey')"  # [not win]
+    - $R -e "library('survey')"           # [not win]
     - "\"%R%\" -e \"library('survey')\""  # [win]
 
 about:
@@ -50,9 +54,14 @@ about:
     calibration, and raking. Two-phase subsampling designs. Graphics. PPS sampling without
     replacement. Principal components, factor analysis.
   license_family: GPL3
+  license_file: '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3'  # [unix]
+  license_file: '{{ environ["PREFIX"] }}\R\share\licenses\GPL-3'  # [win]
 
 extra:
   recipe-maintainers:
     - johanneskoester
     - bgruening
     - daler
+    - jdblischak
+    - cbrueffer
+    - dbast
