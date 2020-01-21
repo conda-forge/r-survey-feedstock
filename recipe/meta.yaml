@@ -1,4 +1,4 @@
-{% set version = '3.36' %}
+{% set version = "3.37" %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -10,11 +10,11 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/survey_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/survey/survey_{{ version }}.tar.gz
-  sha256: 90f32e9d2b52eacf881e6717a4b5edfc5a3beb5da516f8372293549589d79475
+  sha256: bea19c00fa302f965b3db124604248bd0c4d09823cb73b8255ff3f44e06e61b8
 
 build:
   merge_build_host: True  # [win]
-  number: 1
+  number: 0
   noarch: generic
   rpaths:
     - lib/R/lib/
