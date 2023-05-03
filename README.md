@@ -1,11 +1,11 @@
-About r-survey
-==============
+About r-survey-feedstock
+========================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/r-survey-feedstock/blob/main/LICENSE.txt)
 
 Home: http://r-survey.r-forge.r-project.org/survey/
 
 Package license: GPL-2.0-or-later
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/r-survey-feedstock/blob/main/LICENSE.txt)
 
 Summary: Summary statistics, two-sample tests, rank tests, generalised linear models, cumulative link models, Cox models, loglinear models, and general maximum pseudolikelihood estimation for multistage stratified, cluster-sampled, unequally weighted survey samples. Variances by Taylor series linearisation or replicate weights. Post-stratification, calibration, and raking. Two-phase subsampling designs. Graphics. PPS sampling without replacement. Principal components, factor analysis.
 
