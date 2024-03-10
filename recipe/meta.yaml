@@ -1,4 +1,4 @@
-{% set version = "4.2-1" %}
+{% set version = "4.4-1" %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -10,22 +10,32 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/survey_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/survey/survey_{{ version }}.tar.gz
-  sha256: cc3c61e132fb20bed98fa59a8254335a588780a5f4eeb51fab7489390aadf150
+  sha256: 86400f10e4236f69d2bea63f1f8f0e632bb72caa73469c1f9229a2dc6ad68998
 
 build:
   merge_build_host: true  # [win]
-  number: 1
-  noarch: generic
+  number: 0
   rpaths:
     - lib/R/lib/
     - lib/
 
 requirements:
   build:
+    - {{ compiler('c') }}              # [not win]
+    - {{ compiler('m2w64_c') }}        # [win]
+    - {{ compiler('cxx') }}            # [not win]
+    - {{ compiler('m2w64_cxx') }}      # [win]
+    - {{ posix }}filesystem        # [win]
+    - {{ posix }}make
+    - {{ posix }}sed               # [win]
+    - {{ posix }}coreutils         # [win]
     - {{ posix }}zip               # [win]
+    - cross-r-base {{ r_base }}    # [build_platform != target_platform]
   host:
     - r-base
     - r-matrix
+    - r-rcpp >=0.12.8
+    - r-rcpparmadillo
     - r-lattice
     - r-minqa
     - r-mitools >=2.4
@@ -33,7 +43,10 @@ requirements:
     - r-survival
   run:
     - r-base
+    - {{ native }}gcc-libs         # [win]
     - r-matrix
+    - r-rcpp >=0.12.8
+    - r-rcpparmadillo
     - r-lattice
     - r-minqa
     - r-mitools >=2.4
@@ -57,19 +70,3 @@ about:
 extra:
   recipe-maintainers:
     - conda-forge/r
-
-# Package: survey
-# Title: Analysis of Complex Survey Samples
-# Description: Summary statistics, two-sample tests, rank tests, generalised linear models, cumulative link models, Cox models, loglinear models, and general maximum pseudolikelihood estimation for multistage stratified, cluster-sampled, unequally weighted survey samples. Variances by Taylor series linearisation or replicate weights. Post-stratification, calibration, and raking. Two-phase subsampling designs. Graphics. PPS sampling without replacement. Principal components, factor analysis.
-# Version: 3.36
-# Author: Thomas Lumley
-# Maintainer: "Thomas Lumley" <t.lumley@auckland.ac.nz>
-# License: GPL-2 | GPL-3
-# Depends: R (>= 3.1.0), grid, methods, Matrix, survival
-# Imports: stats, graphics, splines, lattice, minqa, numDeriv, mitools (>= 2.4)
-# Suggests: foreign, MASS, KernSmooth, hexbin, RSQLite, RODBC, quantreg, parallel, CompQuadForm, DBI
-# URL: http://r-survey.r-forge.r-project.org/survey/
-# NeedsCompilation: no
-# Packaged: 2019-04-27 01:13:02 UTC; tlumley
-# Repository: CRAN
-# Date/Publication: 2019-04-27 05:00:04 UTC
