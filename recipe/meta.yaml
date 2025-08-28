@@ -31,6 +31,14 @@ requirements:
     - {{ posix }}coreutils         # [win]
     - {{ posix }}zip               # [win]
     - cross-r-base {{ r_base }}    # [build_platform != target_platform]
+    - r-matrix                     # [build_platform != target_platform]
+    - r-rcpp >=0.12.8              # [build_platform != target_platform]
+    - r-rcpparmadillo              # [build_platform != target_platform]
+    - r-lattice                    # [build_platform != target_platform]
+    - r-minqa                      # [build_platform != target_platform]
+    - r-mitools >=2.4              # [build_platform != target_platform]
+    - r-numderiv                   # [build_platform != target_platform]
+    - r-survival                   # [build_platform != target_platform]
   host:
     - r-base
     - r-matrix
