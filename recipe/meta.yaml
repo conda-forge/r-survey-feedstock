@@ -1,4 +1,4 @@
-{% set version = "4.4-8" %}
+{% set version = "4.5" %}
 {% set posix = 'm2-' if win else '' %}
 
 package:
@@ -9,10 +9,10 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/survey_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/survey/survey_{{ version }}.tar.gz
-  sha256: 79893762d70f4ac7db634e991827afadcdbebe22728e4c3a65b22a5fb1707982
+  sha256: 8a2ab01759f9acf6000274255edf00e342dfbf320a39fb76d42594e4d262b519
 
 build:
-  number: 1
+  number: 0
   rpaths:
     - lib/R/lib/
     - lib/
@@ -68,8 +68,8 @@ test:
 about:
   home: http://r-survey.r-forge.r-project.org/survey/
   license: GPL-2.0-or-later
-  summary: Summary statistics, two-sample tests, rank tests, generalised linear models, cumulative link models, Cox models, loglinear models, and general maximum pseudolikelihood estimation for multistage stratified, cluster-sampled, unequally weighted survey samples. Variances by Taylor series linearisation or replicate
-    weights. Post-stratification, calibration, and raking. Two-phase subsampling designs. Graphics. PPS sampling without replacement. Principal components, factor analysis.
+  summary: Summary statistics, two-sample tests, rank tests, generalised linear models, cumulative link models, Cox models, loglinear models, and general maximum pseudolikelihood estimation for multistage stratified, cluster-sampled, unequally weighted survey samples. Variances by Taylor series linearisation or 
+    replicate weights. Post-stratification, calibration, and raking. Two-phase subsampling designs. Graphics. PPS sampling without replacement. Principal components, factor analysis.
   license_family: GPL3
   license_file:
     - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3
